@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Article {
@@ -21,15 +23,16 @@ public class Article {
 
     private String slug;
 
+    private String imageUrl;
+
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
     private Category category;
 
     public Article() { }
@@ -88,5 +91,13 @@ public class Article {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

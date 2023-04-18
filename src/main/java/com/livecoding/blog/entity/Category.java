@@ -1,8 +1,6 @@
 package com.livecoding.blog.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,7 +13,8 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<Article> articles;
 
     public Category() {
